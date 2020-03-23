@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Graph from "./GraphDir/Graph.js"
-import Responders from "./RespondersDir./Responders.js"
+import Responders from "./RespondersDir/Responders.js"
 
 var xhr;
 var counter=0;
