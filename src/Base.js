@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Graph from ".\\GraphDir\\Graph"
+import Graph from "./GraphDir/Graph.js"
 import Responders from ".\\RespondersDir\\Responders"
 
 var xhr;
