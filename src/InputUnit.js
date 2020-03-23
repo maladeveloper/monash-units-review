@@ -38,7 +38,7 @@ setFinalUnitValue(e) {
       <form  onSubmit={this.setFinalUnitValue}>
         <input  onChange={this.unitValue}
         ref = {(el) => this._input = el}
-          placeholder="Enter the unit"></input>
+          placeholder="Enter Monash Unit Code"></input>
         <button type="submit">go</button>
       </form>
     );
