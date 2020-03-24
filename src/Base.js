@@ -51,7 +51,7 @@ startProcess(props){
   console.log(props)
   xhr = new XMLHttpRequest();
   console.log("https://setureportstorage.blob.core.windows.net/setureports/"+props.unit+".json")
-  xhr.open("GET", "https://setureportstorage.blob.core.windows.net/setureports/"+props.unit+".json", true);
+  xhr.open("GET", "https://setureportstorage.blob.core.windows.net/teststorage/0_ALL_UNITS.json", true);
   xhr.send();
   xhr.addEventListener("readystatechange", this.processRequest, false);
 
@@ -68,39 +68,49 @@ componentWillReceiveProps(nextProps){
 processRequest() {
   var isMyValid = false
   if (xhr.readyState === 4 && xhr.status === 200) {
-    isMyValid = true
     var response = JSON.parse(xhr.responseText);
-    this.setState({
-      unit: response.UNIT,
-      S_AGG:{
-        Value: parseInt(response.S_AGG.Value),
-        Count: parseInt(response.S_AGG.Count),
-        Percentage: parseInt(response.S_AGG.Percentage.slice(0,5)),
-      },
-      AGG:{
-        Value: parseInt(response.AGG.Value),
-        Count: parseInt(response.AGG.Count),
-        Percentage: parseInt(response.AGG.Percentage.slice(0,5)),
-      },
-      NEU:{
-        Value: parseInt(response.NEU.Value),
-        Count: parseInt(response.NEU.Count),
-        Percentage: parseInt(response.NEU.Percentage.slice(0,5)),
-      },
-      DIS:{
-        Value: parseInt(response.DIS.Value),
-        Count: parseInt(response.DIS.Count),
-        Percentage: parseInt(response.DIS.Percentage.slice(0,5)),
-      },
-      S_DIS:{
-        Value: parseInt(response.S_DIS.Value),
-        Count: parseInt(response.S_DIS.Count),
-        Percentage: parseInt(response.S_DIS.Percentage.slice(0,5)),
-      },
-      RESP_COUNT:parseFloat(response.RESP_COUNT[0]),
-      MEAN:parseFloat(response.MEAN[0]),
-      MEDIAN:parseFloat(response.MEDIAN[0])
-    });
+    for(var i=0; i<response.length;i++){
+      console.log(response[i]["UNIT"])
+      console.log(this.props.unit)
+      if(this.props.unit == response[i]["UNIT"]){
+                    isMyValid = true
+                    this.setState({
+                      unit: response[i].UNIT,
+                      S_AGG:{
+                        Value: parseInt(response[i].S_AGG.Value),
+                        Count: parseInt(response[i].S_AGG.Count),
+                        Percentage: parseInt(response[i].S_AGG.Percentage.slice(0,5)),
+                      },
+                      AGG:{
+                        Value: parseInt(response[i].AGG.Value),
+                        Count: parseInt(response[i].AGG.Count),
+                        Percentage: parseInt(response[i].AGG.Percentage.slice(0,5)),
+                      },
+                      NEU:{
+                        Value: parseInt(response[i].NEU.Value),
+                        Count: parseInt(response[i].NEU.Count),
+                        Percentage: parseInt(response[i].NEU.Percentage.slice(0,5)),
+                      },
+                      DIS:{
+                        Value: parseInt(response[i].DIS.Value),
+                        Count: parseInt(response[i].DIS.Count),
+                        Percentage: parseInt(response[i].DIS.Percentage.slice(0,5)),
+                      },
+                      S_DIS:{
+                        Value: parseInt(response[i].S_DIS.Value),
+                        Count: parseInt(response[i].S_DIS.Count),
+                        Percentage: parseInt(response[i].S_DIS.Percentage.slice(0,5)),
+                      },
+                      RESP_COUNT:parseFloat(response[i].RESP_COUNT[0]),
+                      MEAN:parseFloat(response[i].MEAN[0]),
+                      MEDIAN:parseFloat(response[i].MEDIAN[0])
+                    });
+                    break;
+          }
+          else {
+            isMyValid = false
+          }
+    }
   }
   this.setState({
     isValid: isMyValid
