@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Graph from "./GraphDir/Graph.js"
 import Responders from "./RespondersDir/Responders.js"
+import ReactStoreIndicator from 'react-score-indicator'
 
 var xhr;
 var counter=0;
@@ -107,10 +108,12 @@ processRequest() {
     return (
       <div >
         <h1>{this.props.unit} Overall Satisfaction</h1>
+        <ReactStoreIndicator value={this.state.MEDIAN} maxValue={5}/>
         <br />
         <div><Graph {...this.state}/></div>
         <br />
         <div><center><Responders {...this.state} /></center></div>
+        <br/>
 
       </div>
     );
