@@ -3,6 +3,10 @@ import Graph from "./GraphDir/Graph.js"
 import Responders from "./RespondersDir/Responders.js"
 import ReactStoreIndicator from 'react-score-indicator'
 import ErrorComp from './ErrorCompDir/ErrorComp.js'
+import Roll from 'react-reveal/Roll';
+import Zoom from 'react-reveal/Zoom';
+
+
 
 var xhr;
 var counter=0;
@@ -51,7 +55,7 @@ startProcess(props){
   console.log(props)
   xhr = new XMLHttpRequest();
   console.log("https://setureportstorage.blob.core.windows.net/setureports/"+props.unit+".json")
-  xhr.open("GET", "https://setureportstorage.blob.core.windows.net/teststorage/0_ALL_UNITS.json", true);
+  xhr.open("GET", "https://setureportstorage.blob.core.windows.net/facultyreports/1_"+props.unit.slice(0,3)+".json", true);
   xhr.send();
   xhr.addEventListener("readystatechange", this.processRequest, false);
 
@@ -125,13 +129,18 @@ processRequest() {
       <div >
       {isFinalValid ? (
         <div>
-            <h1>{this.props.unit} Overall Satisfaction</h1>
-            <br />
-            <ReactStoreIndicator value={this.state.MEDIAN} maxValue={5}/>
-            <br />
-            <div><Graph {...this.state}/></div>
-            <br />
-            <div><center><Responders {...this.state} /></center></div>
+
+                  <h1><Zoom cascade>{this.props.unit} Overall Satisfaction</Zoom></h1>
+                  <br />
+                  <Roll>
+                        <ReactStoreIndicator value={this.state.MEDIAN} maxValue={5}/>
+                  </Roll>
+                  <br />
+                  <div><Graph {...this.state}/></div>
+                  <br />
+                  <div><center><Responders {...this.state} /></center></div>
+
+
         </div>
       ) :(
         <div>

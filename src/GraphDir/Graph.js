@@ -10,6 +10,7 @@ class Graph extends Component {
 	render() {
 		const options = {
 			animationEnabled: true,
+			animationDuration: 4000,
 			exportEnabled: false,
 			theme: "light2", //"light1", "dark1", "dark2"
 			title:{
