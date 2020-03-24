@@ -10,7 +10,7 @@ class Base extends Component {
   constructor(props) {
   super(props);
   this.state= ({
-    isValid: false,
+    isValid: true,
     unit: 0,
     S_AGG:{
       Value: 0,
