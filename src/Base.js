@@ -138,7 +138,8 @@ processRequest() {
                   <br />
                   <div><Graph {...this.state}/></div>
                   <br />
-                  <div><center><Responders {...this.state} /></center></div>
+
+                  <Zoom><div><center><Responders {...this.state} /></center></div></Zoom>
 
 
         </div>
