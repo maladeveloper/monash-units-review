@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Graph from "./GraphDir/Graph.js"
 import Responders from "./RespondersDir/Responders.js"
 import ReactStoreIndicator from 'react-score-indicator'
+import ErrorComp from './ErrorCompDir/ErrorComp.js'
 
 var xhr;
 var counter=0;
@@ -9,6 +10,7 @@ class Base extends Component {
   constructor(props) {
   super(props);
   this.state= ({
+    isValid: false,
     unit: 0,
     S_AGG:{
       Value: 0,
@@ -64,7 +66,9 @@ componentWillReceiveProps(nextProps){
 
 
 processRequest() {
+  var isMyValid = false
   if (xhr.readyState === 4 && xhr.status === 200) {
+    isMyValid = true
     var response = JSON.parse(xhr.responseText);
     this.setState({
       unit: response.UNIT,
@@ -98,23 +102,33 @@ processRequest() {
       MEDIAN:parseFloat(response.MEDIAN[0])
     });
   }
-
+  this.setState({
+    isValid: isMyValid
+  })
   console.log(this.state)
 
 }
 
   render() {
-
+    const isFinalValid = this.state.isValid;
     return (
       <div >
-        <h1>{this.props.unit} Overall Satisfaction</h1>
-        <ReactStoreIndicator value={this.state.MEDIAN} maxValue={5}/>
-        <br />
-        <div><Graph {...this.state}/></div>
-        <br />
-        <div><center><Responders {...this.state} /></center></div>
-        <br/>
-
+      {isFinalValid ? (
+        <div>
+            <h1>{this.props.unit} Overall Satisfaction</h1>
+            <br />
+            <ReactStoreIndicator value={this.state.MEDIAN} maxValue={5}/>
+            <br />
+            <div><Graph {...this.state}/></div>
+            <br />
+            <div><center><Responders {...this.state} /></center></div>
+        </div>
+      ) :(
+        <div>
+         <ErrorComp unit={this.props.unit} />
+        </div>
+      )
+      }
       </div>
     );
   }

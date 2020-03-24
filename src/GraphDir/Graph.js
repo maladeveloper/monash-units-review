@@ -10,7 +10,7 @@ class Graph extends Component {
 	render() {
 		const options = {
 			animationEnabled: true,
-			exportEnabled: true,
+			exportEnabled: false,
 			theme: "light2", //"light1", "dark1", "dark2"
 			title:{
 				text: "Judgement of "+ this.props.unit

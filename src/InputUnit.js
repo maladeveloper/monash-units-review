@@ -34,12 +34,18 @@ setFinalUnitValue(e) {
 }
 
   render() {
+    var inputStyle = {
+       fontSize: "35px"
+    }
+    var buttonStyle ={
+
+    }
     return (
       <form  onSubmit={this.setFinalUnitValue}>
-        <input  onChange={this.unitValue}
+        <input  style={inputStyle} onChange={this.unitValue}
         ref = {(el) => this._input = el}
           placeholder="Enter Monash Unit Code"></input>
-        <button type="submit">go</button>
+        <button style={inputStyle} type="submit">GO</button>
       </form>
     );
   }
