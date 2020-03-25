@@ -47,9 +47,12 @@ setFinalUnitValue(e) {
     }
     return (
       <form  style={formStyle} onSubmit={this.setFinalUnitValue}>
-        <input  style={inputStyle} onChange={this.unitValue}
-        ref = {(el) => this._input = el}
-          placeholder="Enter Monash Unit Code"></input>
+        <input size={"23"} list={"unitInput"} style={inputStyle} onChange={this.unitValue} ref = {(el) => this._input = el} placeholder="Enter Monash Unit Code">
+
+          </input>
+          <datalist id={"unitInput"}>
+              <option >Alabama</option>
+          </datalist>
         <button style={buttonStyle}  type="submit" class="btn btn-primary">GO</button>
       </form>
     );
